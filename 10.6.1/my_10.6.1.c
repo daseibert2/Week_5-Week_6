@@ -28,7 +28,7 @@ double exact(double t,double x)
 
 double error(double exact1,double approx)
 {
-    return (fabs(approx-exact1)/approx)*100;
+    return (fabs(approx-exact1)/fabs(approx))*100;
 }
 
 void printAll(double u[t_size+1][x_size+1],FILE *fptr)
@@ -55,13 +55,22 @@ void printAll(double u[t_size+1][x_size+1],FILE *fptr)
             printf("u(%d)(%d): %3.20lf\t",n,j,u[n][j]);
             printf("Exact(%d): %3.20lf\t",j,ex);
             printf("Error(%d): %3.20lf\n",j,err);
-            //fprintf(fptr,"%d,%d,%lf,%lf,%lf\n",n,j,u[n][j],ex,err);
-            //fprintf(fptr,"%d %d %lf %lf %lf\n",n,j,u[n][j],ex,err);
-            fprintf(ue,"%lf ",u[n][j]);
-            fprintf(xe, "%d ",j);
-            fprintf(te, "%d ",n);
-            fprintf(exe, "%lf ",ex);
-            fprintf(ere, "%lf\n",ere);
+            if(u[n][j]==0)
+                fprintf(fptr,"%d,%d,%lf,%lf,%lf\n",n,j,u[n][j],ex,0.0);
+            else
+                fprintf(fptr,"%d,%d,%lf,%lf,%lf\n",n,j,u[n][j],ex,err);
+            /*if(u[n][j]==0)
+                fprintf(fptr,"%d %d %lf %lf %lf\n",n,j,u[n][j],ex,0.0);
+            else
+                fprintf(fptr,"%d %d %lf %lf %lf\n",n,j,u[n][j],ex,err);*/
+            fprintf(ue,"%lf\n",u[n][j]);
+            fprintf(xe, "%d\n",j);
+            fprintf(te, "%d\n",n);
+            fprintf(exe, "%lf\n",ex);
+            if(u[n][j]==0)
+                fprintf(ere,"%lf\n",0.0);
+            else
+                fprintf(ere, "%lf\n",err);
         }
         printf("\n\n");
     }
@@ -95,13 +104,22 @@ void printAll_1(double u[t_size+1][x_size+1],FILE *fptr1)
             printf("u(%d)(%d): %3.20lf\t",n,j,u[n][j]);
             printf("Exact(%d): %3.20lf\t",j,ex);
             printf("Error(%d): %3.20lf\n",j,err);
-            fprintf(fptr1,"%d,%d,%lf,%lf,%lf\n",n,j,u[n][j],ex,err);
-            //fprintf(fptr1,"%d %d %lf %lf %lf\n",n,j,u[n][j],ex,err);
-            fprintf(ui,"%lf ",u[n][j]);
-            fprintf(xi, "%d ",j);
-            fprintf(ti, "%d ",n);
-            fprintf(exi, "%lf ",ex);
-            fprintf(eri, "%lf\n",err);
+            if(u[n][j]==0)
+                fprintf(fptr1,"%d,%d,%lf,%lf,%lf\n",n,j,u[n][j],ex,0.0);
+            else
+                fprintf(fptr1,"%d,%d,%lf,%lf,%lf\n",n,j,u[n][j],ex,err);
+            /*if(u[n][j]==0)
+                fprintf(fptr1,"%d %d %lf %lf %lf\n",n,j,u[n][j],ex,0.0);
+            else
+                fprintf(fptr1,"%d %d %lf %lf %lf\n",n,j,u[n][j],ex,err);*/
+            fprintf(ui,"%lf\n",u[n][j]);
+            fprintf(xi, "%d\n",j);
+            fprintf(ti, "%d\n",n);
+            fprintf(exi, "%lf\n",ex);
+            if(u[n][j]==0)
+                fprintf(eri,"%lf\n",0.0);
+            else
+                fprintf(eri, "%lf\n",err);
         }
         printf("\n\n");
     }
@@ -136,13 +154,22 @@ void printAll_2(double u_2[t_size+1][x_size+1],FILE *fptr2)
             printf("u(%d)(%d): %3.20lf\t",n,j,u_2[n][j]);
             printf("Exact(%d): %3.20lf\t",j,ex);
             printf("Error(%d): %3.20lf\n",j,err);
-            fprintf(fptr2,"%d,%d,%lf,%lf,%lf\n",n,j,u_2[n][j],ex,err);
-            //fprintf(fptr2,"%d %d %lf %lf %lf\n",n,j,u_2[n][j],ex,err);
-            fprintf(ucn,"%lf ",u_2[n][j]);
-            fprintf(xcn, "%d ",j);
-            fprintf(tcn, "%d ",n);
-            fprintf(excn, "%lf ",ex);
-            fprintf(ercn, "%lf\n",err);
+            if(u_2[n][j]==0)
+                fprintf(fptr2,"%d,%d,%lf,%lf,%lf\n",n,j,u_2[n][j],ex,0.0);
+            else
+                fprintf(fptr2,"%d,%d,%lf,%lf,%lf\n",n,j,u_2[n][j],ex,err);
+            /*if(u_2[n][j]==0)
+                fprintf(fptr2,"%d %d %lf %lf %lf\n",n,j,u_2[n][j],ex,0.0);
+            else
+                fprintf(fptr,"%d %d %lf %lf %lf\n",n,j,u_2[n][j],ex,err);*/
+            fprintf(ucn,"%lf\n",u_2[n][j]);
+            fprintf(xcn, "%d\n",j);
+            fprintf(tcn, "%d\n",n);
+            fprintf(excn, "%lf\n",ex);
+            if(u_2[n][j]==0)
+                fprintf(ercn,"%lf\n",0.0);
+            else
+                fprintf(ercn, "%lf\n",err);
         }
         printf("\n\n");
     }
@@ -177,13 +204,22 @@ void printAll_3(double u_3[t_size+1][x_size+1],FILE *fptr3)
             printf("u(%d)(%d): %3.20lf\t",n,j,u_3[n][j]);
             printf("Exact(%d): %3.20lf\t",j,ex);
             printf("Error(%d): %3.20lf\n",j,err);
-            fprintf(fptr3,"%d,%d,%lf,%lf,%lf\n",n,j,u_3[n][j],ex,err);
-            //fprintf(fptr3,"%d %d %lf %lf %lf\n",n,j,u_3[n][j],ex,err);
-            fprintf(ug,"%lf ",u_3[n][j]);
-            fprintf(xg, "%d ",j);
-            fprintf(tg, "%d ",n);
-            fprintf(exg, "%lf ",ex);
-            fprintf(erg, "%lf\n",err);
+            if(u_3[n][j]==0)
+                fprintf(fptr3,"%d,%d,%lf,%lf,%lf\n",n,j,u_3[n][j],ex,0.0);
+            else
+                fprintf(fptr3,"%d,%d,%lf,%lf,%lf\n",n,j,u_3[n][j],ex,err);
+            /*if(u_3[n][j]==0)
+                fprintf(fptr3,"%d %d %lf %lf %lf\n",n,j,u_3[n][j],ex,0.0);
+            else
+                fprintf(fptr3,"%d %d %lf %lf %lf\n",n,j,u_3[n][j],ex,err);*/
+            fprintf(ug,"%lf\n",u_3[n][j]);
+            fprintf(xg, "%d\n",j);
+            fprintf(tg, "%d\n",n);
+            fprintf(exg, "%lf\n",ex);
+            if(u_3[n][j]==0)
+                fprintf(erg,"%lf\n",0.0);
+            else
+                fprintf(erg, "%lf\n",err);
         }
         printf("\n\n");
     }
@@ -419,15 +455,15 @@ int main()
 
 //-----------------------------------------Part 1: Explicit---------------------------------------------
 
-    //Explicit();
+    Explicit();
 
 //-----------------------------------------Part 2: Implicit---------------------------------------------
 
-    //Implicit();
+    Implicit();
 
 //-----------------------------------------Part 3: Crank-Nicolson---------------------------------------
 
-    //CrankNicolson();
+    CrankNicolson();
 
 //-----------------------------------------Part 4: Gauss---------------------------------------
 
