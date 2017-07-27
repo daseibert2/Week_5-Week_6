@@ -2,173 +2,176 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-#define NUM 20
+
+int num=20;
 
 int randInt( int min, int max )
 {
   return ((rand()*(max-min+1))/(RAND_MAX+1) + min) ;
 }
 
-int checkBox(int grid[NUM][NUM],int start_r,int start_c,int num)    //checks all #s in box area
+int checkBox(int grid[num][num],int r,int c)    //checks all #s in box area
 {
-    int r,c,i,j,count=0;
-    r=start_r;c=start_c;
+    int i,j,count=0;
+
+    count=0;
 
    if(r==0&&c==0)
    {
-
-       if(grid[r+1][c]==1)
-        count++;
-    if(grid[r][c+1]==1)
-        count++;
-    if(grid[r+1][c+1]==1)
-        count++;
-        printf("%d\t",count);
-   }
-   else if(r==0&&c==num-1)
-   {
-
-       if(grid[r][c-1]==1)
-        count++;
-        if(grid[r+1][c-1]==1)
-        count++;
-        if(grid[r+1][c]==1)
-        count++;
-
-   }
-   else if(r==0&&c>=1&&c<num-1)
-   {
-       if(grid[r][c-1]==1)
-        count++;
-       if(grid[r][c+1]==1)
-        count++;
-       if(grid[r+1][c-1]==1)
-        count++;
-        if(grid[r+1][c]==1)
-        count++;
-        if(grid[r+1][c+1]==1)
-        count++;
-   }
-   else if(r>=1&&r<num-1&&c==0)
-   {
-       if(grid[r-1][c]==1)
-        count++;
-       if(grid[r-1][c+1]==1)
-        count++;
-       if(grid[r][c+1]==1)
-        count++;
-        if(grid[r+1][c]==1)
-        count++;
-        if(grid[r+1][c+1]==1)
-        count++;
-   }
-   else if(r>=1&&r<num-1&&c==num-1)
-   {
-       if(grid[r-1][c]==1)
-        count++;
-       if(grid[r-1][c-1]==1)
-        count++;
-       if(grid[r][c-1]==1)
-        count++;
-        if(grid[r+1][c]==1)
-        count++;
-        if(grid[r+1][c-1]==1)
-        count++;
-   }
-   else if(r==num-1&&c==0)
-   {
-       if(grid[r-1][c]==1)
-        count++;
-        if(grid[r-1][c+1]==1)
-        count++;
-        if(grid[r][c+1]==1)
-        count++;
+       for(i=r;i<=r+1;i++)
+       {
+           for(j=c;j<=c+1;j++)
+           {
+               if(i==r&&j==c)
+                    continue;
+               else if(grid[i][j]==1)
+                    count++;
+           }
+       }
    }
    else if(r==num-1&&c==num-1)
    {
-
-       if(grid[r-1][c-1]==1)
-        count++;
-        if(grid[r-1][c]==1)
-        count++;
-        if(grid[r][c-1]==1)
-        count++;
+       for(i=r-1;i<=r;i++)
+       {
+           for(j=c-1;j<=c;j++)
+           {
+               if(i==r&&j==c)
+                    continue;
+               else if(grid[i][j]==1)
+                    count++;
+           }
+       }
    }
-   else if(r==num-1&&c>=1&&c<num-1)
+   else if(r==0&&c==num-1)
    {
-       if(grid[r][c-1]==1)
-        count++;
-       if(grid[r][c+1]==1)
-        count++;
-       if(grid[r-1][c-1]==1)
-        count++;
-        if(grid[r-1][c]==1)
-        count++;
-        if(grid[r-1][c+1]==1)
-        count++;
+       for(i=r;i<=r+1;i++)
+       {
+           for(j=c-1;j<=c;j++)
+           {
+               if(i==r&&j==c)
+                    continue;
+               else if(grid[i][j]==1)
+                    count++;
+           }
+       }
    }
-    else
-    {
-   if(grid[r-1][c-1]==1)
-        count++;
-    if(grid[r][c-1]==1)
-        count++;
-    if(grid[r+1][c-1]==1)
-        count++;
-    if(grid[r-1][c]==1)
-        count++;
-    if(grid[r+1][c]==1)
-        count++;
-    if(grid[r-1][c+1]==1)
-        count++;
-    if(grid[r][c+1]==1)
-        count++;
-    if(grid[r+1][c+1]==1)
-        count++;
+   else if(r==0&&c!=0)
+   {
+       for(i=r;i<=r+1;i++)
+       {
+           for(j=c-1;j<=c+1;j++)
+           {
+               if(i==r&&j==c)
+                    continue;
+               else if(grid[i][j]==1)
+                    count++;
+           }
+       }
+   }
+   else if(c==0&&r!=0)
+   {
+       for(i=r-1;i<=r+1;i++)
+       {
+           for(j=c;j<=c+1;j++)
+           {
+               if(i==r&&j==c)
+                    continue;
+               else if(grid[i][j]==1)
+                    count++;
+           }
+       }
+   }
+   else if(r==num-1&&c==0)
+   {
+       for(i=r-1;i<=r;i++)
+       {
+           for(j=c;j<=c+1;j++)
+           {
+               if(i==r&&j==c)
+                    continue;
+               else if(grid[i][j]==1)
+                    count++;
+           }
+       }
+   }
+   else if(r==num-1&&c==num-1)
+   {
+       for(i=r-1;i<=r;i++)
+       {
+           for(j=c-1;j<=c;j++)
+           {
+               if(i==r&&j==c)
+                    continue;
+               else if(grid[i][j]==1)
+                    count++;
+           }
+       }
+   }
+   else if(r==num-1&&c!=num-1)
+   {
+       for(i=r-1;i<=r;i++)
+       {
+           for(j=c-1;j<=c+1;j++)
+           {
+               if(i==r&&j==c)
+                    continue;
+               else if(grid[i][j]==1)
+                    count++;
+           }
+       }
+   }
+   else if(c==num-1&&r!=num-1)
+   {
+       for(i=r-1;i<=r+1;i++)
+       {
+           for(j=c-1;j<=c;j++)
+           {
+               if(i==r&&j==c)
+                    continue;
+               else if(grid[i][j]==1)
+                    count++;
+           }
+       }
+   }
+   else
+   {
+       for(i=r-1;i<=r+1;i++)
+       {
+           for(j=c-1;j<=c+1;j++)
+           {
+               if(i==r&&j==c)
+                    continue;
+               else if(grid[i][j]==1)
+                    count++;
+           }
+       }
     }
-
-    //printf("%d\n",count);
-    if(count<2&&grid[start_r][start_c]==1)
-    {
-        //grid[start_r][start_c]= 0;
-        return 0;
-    }
-    else if(grid[start_r][start_c]==1&&count>=2||count<=3)
-    {
-        //grid[start_r][start_c]=1;
-        return 1;
-    }
-    else if(count>3&&grid[start_r][start_c])
-    {
-        //grid[start_r][start_c]=0;
-        return 0;
-    }
-    else if(count==3&&!grid[start_r][start_c])
-    {
-        //grid[start_r][start_c]=1;
-        return 1;
-    }
-    count=0;
+//printf(" count:%d\t",count);
+    return count;
 
 }
 
+
 int main()
 {
-  int i,j,num=0,count=0;
-  static int c[NUM][NUM];
+  int i,j,count1=0;
+
+  time_t t;
     printf("Enter value of N for number of rows and columns: ");
     scanf("%d",&num);
     char answer='y';
-    static int grid[NUM][NUM];
+      int c[num][num];
+    int grid[num][num];
 
   /* Initialize the random number generator */
-  srand( time(NULL) );
-    printf("\n\nGeneration %d:\n\n",count);
+  srand( time(&t));
+    printf("\n\nGeneration %d:\n\n",count1);
     for(i=0;i<num;i++)
     {
        for(j=0;j<num;j++)
        {
            c[i][j]=randInt(0,1);
+           grid[i][j]=0;
            printf("%d ",c[i][j]);
        }
        printf("\n");
@@ -176,23 +179,51 @@ int main()
 
     while(answer=='y')
     {
-        count++;
-        printf("\n\nGeneration %d:\n\n",count);
-
-        for(i=0;i<num;i++)
-            {
-            for(j=0;j<num;j++)
-            {
-                grid[i][j]=c[i][j];
-            }
-        }
+        count1++;
+        printf("\n\nGeneration %d:\n\n",count1);
 
         for(i=0;i<num;i++)
         {
             for(j=0;j<num;j++)
             {
-                c[i][j]=checkBox(grid,i,j,num);
-                printf("%d ",c[i][j]);
+                if(c[i][j]==0)          //dead
+                {
+                     //printf("hi");
+                    if(checkBox(c,i,j)==3)
+                    {
+                        grid[i][j]=1;           //revived
+                    }
+                    else
+                    {
+                        grid[i][j]=0;           //dead
+                    }
+                }
+                else if(c[i][j]==1)
+                {
+                    if(checkBox(c,i,j)==2||checkBox(c,i,j)==3)
+                    {
+                        grid[i][j]=1;               //still alive
+                    }
+                    else
+                    {
+                        grid[i][j]=0;               //killed
+                    }
+                }
+               // printf("%d ",grid[i][j]);
+
+            }
+            //printf("\n");
+
+        }
+
+        i=0;
+        j=0;
+        for(i=0;i<num;i++)
+        {
+            for(j=0;j<num;j++)
+            {
+                printf("%d ",grid[i][j]);
+                c[i][j]=grid[i][j];
             }
             printf("\n");
         }
@@ -203,3 +234,4 @@ int main()
 
     return 0;
 }
+
