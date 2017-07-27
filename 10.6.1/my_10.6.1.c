@@ -80,6 +80,7 @@ void printAll(double u[t_size+1][x_size+1],FILE *fptr)
     fclose(exe);
     fclose(ere);
 }
+
 void printAll_1(double u[t_size+1][x_size+1],FILE *fptr1)
 {
     double ex=0,err=0;
@@ -244,7 +245,7 @@ void boundaries(double u[t_size+1][x_size+1],int row)
     u[row][x_size]=0;
 }
 
-void tridiagonal(double u_1[t_size+1][x_size+1])        //n is changing
+void tridiagonal(double u_1[t_size+1][x_size+1])                  //n is changing
 {
     int i,w,j,row;
 
@@ -275,7 +276,7 @@ void tridiagonal(double u_1[t_size+1][x_size+1])        //n is changing
 
 }
 
-void fill(double u[t_size+1][x_size+1],int row)                          //Explicit
+void fill(double u[t_size+1][x_size+1],int row)                   //Explicit
 {
     for(int j=1;j<x_size;j++)
     {
@@ -321,19 +322,51 @@ void fill_2(double u_2[t_size+1][x_size+1])                       //C-N
 
 void fill_3(double u_3[t_size+1][x_size+1])
 {
-    int k,t,x;
+    int k,t,x,v,count=0;
 
     double a=1.0+2.0*Y;
     double b=-Y;
     double c=-Y;
+    double val[t_size][x_size],why=0,test=0,test1=0;
 
-    for(k=0;k<it;k++)
+    for(x=0;x<=x_size;x++)
     {
-        for(t=1;t<=t_size;t++)
+        val[0][x]=u_3[0][x];
+    }
+
+    for(t=1;t<=t_size;t++)
+    {
+        for(k=1;k<it;k++)
         {
+            //printf("k: %d\n",k);
+            test=0;
+            test1=0;
             for(x=1;x<x_size;x++)
             {
                 u_3[t][x]=(u_3[t-1][x]-b*u_3[t][x-1]-c*u_3[t][x+1])/a;
+                //printf("u(%d)(%d): %lf ",t,x,u_3[t][x]);
+                val[k][x]=u_3[t][x];
+            }
+            for(v=1;v<x_size;v++)
+            {
+                //printf("\nval(%d)(%d): %lf ",k-1,v,val[k-1][v]);
+                why=fabs(u_3[t][v]-val[k-1][v]);
+                //printf("why: %lf",why);
+                if(why<=0.00000003)
+                {
+                    test1++;
+                    if(test1==x_size-1)
+                    {
+                        test=1;
+                        break;
+                    }
+                }
+            }
+
+            //printf("\n");
+            if(test==1)
+            {
+                break;
             }
         }
     }
@@ -455,17 +488,17 @@ int main()
 
 //-----------------------------------------Part 1: Explicit---------------------------------------------
 
-    Explicit();
+    //Explicit();
 
 //-----------------------------------------Part 2: Implicit---------------------------------------------
 
-    Implicit();
+    //Implicit();
 
 //-----------------------------------------Part 3: Crank-Nicolson---------------------------------------
 
-    CrankNicolson();
+    //CrankNicolson();
 
-//-----------------------------------------Part 4: Gauss---------------------------------------
+//-----------------------------------------Part 4: Gauss------------------------------------------------
 
     Gauss();
 
