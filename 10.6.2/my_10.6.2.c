@@ -45,9 +45,9 @@ void printAll(double u[t_size+1][x_size+1],FILE *fptr)
     exe=fopen("ex_explicit_2.txt","w");
     ere=fopen("err_explicit_2.txt","w");
 
-    for(int n=0;n<t_size;n++)
+    for(int n=0;n<=t_size;n++)
     {
-        for(int j=0;j<x_size;j++)
+        for(int j=0;j<=x_size;j++)
         {
             ex=exact(n*dt,j*dx);
             //printf("%lf %lf\n\n",n*dt,j*dx);
@@ -233,7 +233,7 @@ void printAll_3(double u_3[t_size+1][x_size+1],FILE *fptr3)
 
 void zeroesU(double u[t_size+1][x_size+1])
 {
-    for(int i=0;i<=x_size;i++)
+    for(int i=0;i<x_size;i++)
     {
         u[0][i]=cos(i*dx*(n_initial*.5));
     }
@@ -412,10 +412,13 @@ void Explicit()
 
     zeroesU(u);
 
-    for(int n=1;n<t_size;n++)
+    for(int n=0;n<=t_size;n++)
     {
         boundaries(u,n);
-        fill(u,n);
+    }
+    for(int m=1;m<=t_size;m++)
+    {
+        fill(u,m);
     }
 
     printAll(u,fptr);
@@ -515,7 +518,7 @@ int main()
 
 //-----------------------------------------Part 1: Explicit---------------------------------------------
 
-    //Explicit();
+    ///Explicit();
 
 //-----------------------------------------Part 2: Implicit---------------------------------------------
 
