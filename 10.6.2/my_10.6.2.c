@@ -362,27 +362,34 @@ void fill_3(double u_3[t_size+1][x_size+1])
     for(t=1;t<=t_size;t++)
     {
         for(k=1;k<it;k++)
-    {
-            printf("k: %d\n",k);
+        {
+            //this is just in case my version doesn't work
+            /*u_3[t][0]=(u_3[t-1][0]-b*u_3[t][1]-c*u_3[t][1])/a;
+            for(x=1;x<x_size;x++)
+            {
+                u_3[t][x]=(u_3[t-1][x]-b*u_3[t][x-1]-c*u_3[t][x+1])/a;
+            }*/
+
+            //printf("k: %d\n",k);
             test=0;
             test1=0;
             u_3[t][0]=(u_3[t-1][0]-b*u_3[t][1]-c*u_3[t][1])/a;
-            //val[t][0]=u_3[t][0];
-            for(x=0;x<x_size;x++)
+            val[k][0]=u_3[t][0];
+            for(x=1;x<x_size;x++)
             {
                 u_3[t][x]=(u_3[t-1][x]-b*u_3[t][x-1]-c*u_3[t][x+1])/a;
-                printf("u(%d)(%d): %lf ",t,x,u_3[t][x]);
+                //printf("u(%d)(%d): %lf ",t,x,u_3[t][x]);
                 val[k][x]=u_3[t][x];
             }
-            for(v=0;v<x_size;v++)
+            for(v=1;v<x_size;v++)
             {
-                printf("\nval(%d)(%d): %lf ",k-1,v,val[k-1][v]);
+                //printf("\nval(%d)(%d): %lf ",k-1,v,val[k-1][v]);
                 why=fabs(u_3[t][v]-val[k-1][v]);
-                printf("why: %.9lf",why);
+                //printf("why: %.9lf",why);
                 if(why<0.00000001)
                 {
                     test1++;
-                    if(test1==x_size-1)
+                    if(test1==x_size-2)
                     {
                         test=1;
                         break;
@@ -390,11 +397,12 @@ void fill_3(double u_3[t_size+1][x_size+1])
                 }
             }
 
-            printf("\n");
+           // printf("\n");
             if(test==1)
             {
                 break;
             }
+
         }
     }
 }
@@ -493,13 +501,15 @@ void Gauss()
 
     double u_3[t_size+1][x_size+1];
 
-    for(int j=0;j<=t_size;j++)
+    for(int j=1;j<=t_size;j++)
     {
-        for(int i=0;i<=x_size;i++)
+        for(int i=0;i<x_size;i++)
         {
-            u_3[j][i]=sin(i*dx*n_initial);
+            u_3[j][i]=cos(i*dx*(n_initial*.5));
         }
     }
+
+    zeroesU(u_3);
 
     for(int n=0;n<=t_size;n++)
     {
