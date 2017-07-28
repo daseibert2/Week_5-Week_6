@@ -48,7 +48,7 @@ int main()                   //estimate to 2,4,8,and 16 decimal places
             printf("Estimated Pi: %.20lf\n\n",pi);
             printf("Actual Pi:    %.20lf\n\n",exact);
             printf("Difference:   %.20lf\n\n\n\n",diff);
-            getch();
+            //getch();
         }
    }
 
