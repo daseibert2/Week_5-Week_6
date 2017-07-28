@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1501217192 source:d:\matrixmultiplication\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+
