@@ -35,13 +35,9 @@ void printAll(double u[t_size+1][x_size+1],FILE *fptr)
 {
     double ex=0,err=0;
     FILE *ue;
-    FILE *xe;
-    FILE *te;
     FILE *exe;
     FILE *ere;
     ue=fopen("u_explicit_2.txt","w");
-    xe=fopen("x_explicit_2.txt","w");
-    te=fopen("t_explicit_2.txt","w");
     exe=fopen("ex_explicit_2.txt","w");
     ere=fopen("err_explicit_2.txt","w");
 
@@ -56,27 +52,23 @@ void printAll(double u[t_size+1][x_size+1],FILE *fptr)
             printf("Exact(%d): %3.20lf\t",j,ex);
             printf("Error(%d): %3.20lf\n",j,err);
             if(u[n][j]==0)
-                fprintf(fptr,"%d,%d,%lf,%lf,%lf\n",n,j,u[n][j],ex,0.0);
+                fprintf(fptr,"%lf,%lf,%lf\n",u[n][j],ex,0.0);
             else
-                fprintf(fptr,"%d,%d,%lf,%lf,%lf\n",n,j,u[n][j],ex,err);
-            /*if(u[n][j]==0)
-                fprintf(fptr,"%d %d %lf %lf %lf\n",n,j,u[n][j],ex,0.0);
-            else
-                fprintf(fptr,"%d %d %lf %lf %lf\n",n,j,u[n][j],ex,err);*/
-            fprintf(ue,"%lf\n",u[n][j]);
-            fprintf(xe, "%d\n",j);
-            fprintf(te, "%d\n",n);
-            fprintf(exe, "%lf\n",ex);
+                fprintf(fptr,"%lf,%lf,%lf\n",u[n][j],ex,err);
+            fprintf(ue,"%lf,",u[n][j]);
+            fprintf(exe, "%lf,",ex);
             if(u[n][j]==0)
-                fprintf(ere,"%lf\n",0.0);
+                fprintf(ere,"%lf,",0.0);
             else
-                fprintf(ere, "%lf\n",err);
+                fprintf(ere, "%lf,",err);
         }
+        fprintf(ue,"\n\n");
+        fprintf(exe,"\n\n");
+        fprintf(ere,"\n\n");
+
         printf("\n\n");
     }
     fclose(ue);
-    fclose(xe);
-    fclose(te);
     fclose(exe);
     fclose(ere);
 }
@@ -85,13 +77,9 @@ void printAll_1(double u[t_size+1][x_size+1],FILE *fptr1)
 {
     double ex=0,err=0;
     FILE *ui;
-    FILE *xi;
-    FILE *ti;
     FILE *exi;
     FILE *eri;
     ui=fopen("u_implicit_2.txt","w");
-    xi=fopen("x_implicit_2.txt","w");
-    ti=fopen("t_implicit_2.txt","w");
     exi=fopen("ex_implicit_2.txt","w");
     eri=fopen("err_implicit_2.txt","w");
 
@@ -106,27 +94,23 @@ void printAll_1(double u[t_size+1][x_size+1],FILE *fptr1)
             printf("Exact(%d): %3.20lf\t",j,ex);
             printf("Error(%d): %3.20lf\n",j,err);
             if(u[n][j]==0)
-                fprintf(fptr1,"%d,%d,%lf,%lf,%lf\n",n,j,u[n][j],ex,0.0);
+                fprintf(fptr1,"%lf,%lf,%lf\n",u[n][j],ex,0.0);
             else
-                fprintf(fptr1,"%d,%d,%lf,%lf,%lf\n",n,j,u[n][j],ex,err);
-            /*if(u[n][j]==0)
-                fprintf(fptr1,"%d %d %lf %lf %lf\n",n,j,u[n][j],ex,0.0);
-            else
-                fprintf(fptr1,"%d %d %lf %lf %lf\n",n,j,u[n][j],ex,err);*/
-            fprintf(ui,"%lf\n",u[n][j]);
-            fprintf(xi, "%d\n",j);
-            fprintf(ti, "%d\n",n);
-            fprintf(exi, "%lf\n",ex);
+                fprintf(fptr1,"%lf,%lf,%lf\n",u[n][j],ex,err);
+            fprintf(ui,"%lf,",u[n][j]);
+            fprintf(exi, "%lf,",ex);
             if(u[n][j]==0)
-                fprintf(eri,"%lf\n",0.0);
+                fprintf(eri,"%lf,",0.0);
             else
-                fprintf(eri, "%lf\n",err);
+                fprintf(eri, "%lf,",err);
         }
+        fprintf(ui,"\n\n");
+        fprintf(exi,"\n\n");
+        fprintf(eri,"\n\n");
+
         printf("\n\n");
     }
     fclose(ui);
-    fclose(xi);
-    fclose(ti);
     fclose(exi);
     fclose(eri);
 }
@@ -135,13 +119,9 @@ void printAll_2(double u_2[t_size+1][x_size+1],FILE *fptr2)
 {
     double ex=0,err=0;
     FILE *ucn;
-    FILE *xcn;
-    FILE *tcn;
     FILE *excn;
     FILE *ercn;
     ucn=fopen("u_cranknicolson_2.txt","w");
-    xcn=fopen("x_cranknicolson_2.txt","w");
-    tcn=fopen("t_cranknicolson_2.txt","w");
     excn=fopen("ex_cranknicolson_2.txt","w");
     ercn=fopen("err_cranknicolson_2.txt","w");
 
@@ -156,27 +136,23 @@ void printAll_2(double u_2[t_size+1][x_size+1],FILE *fptr2)
             printf("Exact(%d): %3.20lf\t",j,ex);
             printf("Error(%d): %3.20lf\n",j,err);
             if(u_2[n][j]==0)
-                fprintf(fptr2,"%d,%d,%lf,%lf,%lf\n",n,j,u_2[n][j],ex,0.0);
+                fprintf(fptr2,"%lf,%lf,%lf\n",u_2[n][j],ex,0.0);
             else
-                fprintf(fptr2,"%d,%d,%lf,%lf,%lf\n",n,j,u_2[n][j],ex,err);
-            /*if(u_2[n][j]==0)
-                fprintf(fptr2,"%d %d %lf %lf %lf\n",n,j,u_2[n][j],ex,0.0);
-            else
-                fprintf(fptr,"%d %d %lf %lf %lf\n",n,j,u_2[n][j],ex,err);*/
-            fprintf(ucn,"%lf\n",u_2[n][j]);
-            fprintf(xcn, "%d\n",j);
-            fprintf(tcn, "%d\n",n);
-            fprintf(excn, "%lf\n",ex);
+                fprintf(fptr2,"%lf,%lf,%lf\n",u_2[n][j],ex,err);
+            fprintf(ucn,"%lf,",u_2[n][j]);
+            fprintf(excn, "%lf,",ex);
             if(u_2[n][j]==0)
-                fprintf(ercn,"%lf\n",0.0);
+                fprintf(ercn,"%lf,",0.0);
             else
-                fprintf(ercn, "%lf\n",err);
+                fprintf(ercn, "%lf,",err);
         }
+        fprintf(ucn,"\n\n");
+        fprintf(excn,"\n\n");
+        fprintf(ercn,"\n\n");
+
         printf("\n\n");
     }
     fclose(ucn);
-    fclose(xcn);
-    fclose(tcn);
     fclose(excn);
     fclose(ercn);
 }
@@ -185,13 +161,9 @@ void printAll_3(double u_3[t_size+1][x_size+1],FILE *fptr3)
 {
     double ex=0,err=0;
     FILE *ug;
-    FILE *xg;
-    FILE *tg;
     FILE *exg;
     FILE *erg;
     ug=fopen("u_gauss_2.txt","w");
-    xg=fopen("x_gauss_2.txt","w");
-    tg=fopen("t_gauss_2.txt","w");
     exg=fopen("ex_gauss_2.txt","w");
     erg=fopen("err_gauss_2.txt","w");
 
@@ -206,27 +178,23 @@ void printAll_3(double u_3[t_size+1][x_size+1],FILE *fptr3)
             printf("Exact(%d): %3.20lf\t",j,ex);
             printf("Error(%d): %3.20lf\n",j,err);
             if(u_3[n][j]==0)
-                fprintf(fptr3,"%d,%d,%lf,%lf,%lf\n",n,j,u_3[n][j],ex,0.0);
+                fprintf(fptr3,"%lf,%lf,%lf\n",u_3[n][j],ex,0.0);
             else
-                fprintf(fptr3,"%d,%d,%lf,%lf,%lf\n",n,j,u_3[n][j],ex,err);
-            /*if(u_3[n][j]==0)
-                fprintf(fptr3,"%d %d %lf %lf %lf\n",n,j,u_3[n][j],ex,0.0);
-            else
-                fprintf(fptr3,"%d %d %lf %lf %lf\n",n,j,u_3[n][j],ex,err);*/
-            fprintf(ug,"%lf\n",u_3[n][j]);
-            fprintf(xg, "%d\n",j);
-            fprintf(tg, "%d\n",n);
-            fprintf(exg, "%lf\n",ex);
+                fprintf(fptr3,"%lf,%lf,%lf\n",u_3[n][j],ex,err);
+            fprintf(ug,"%lf,",u_3[n][j]);
+            fprintf(exg, "%lf,",ex);
             if(u_3[n][j]==0)
-                fprintf(erg,"%lf\n",0.0);
+                fprintf(erg,"%lf,",0.0);
             else
-                fprintf(erg, "%lf\n",err);
+                fprintf(erg, "%lf,",err);
         }
+        fprintf(ug,"\n\n");
+        fprintf(exg,"\n\n");
+        fprintf(erg,"\n\n");
+
         printf("\n\n");
     }
     fclose(ug);
-    fclose(xg);
-    fclose(tg);
     fclose(exg);
     fclose(erg);
 }
@@ -263,7 +231,7 @@ void tridiagonal(double u_1[t_size+1][x_size+1])        //n is changing
         {
             if(j==1)
             {
-                alpha[j]=(a-2*c*b/alpha[j-1]);
+                alpha[j]=a-2*c*b/alpha[j-1];
             }
             else
             {
@@ -352,7 +320,10 @@ void fill_3(double u_3[t_size+1][x_size+1])
     double b=-Y;
     double c=-Y;
 
-    double val[t_size][x_size],why=0,test=0,test1=0;
+    double val[t_size][x_size],ex,err,why=0,test=0,test1=0;
+
+    FILE *log_2;
+    log_2=fopen("log_2.txt","w");
 
     for(x=0;x<=x_size;x++)
     {
@@ -400,18 +371,32 @@ void fill_3(double u_3[t_size+1][x_size+1])
            // printf("\n");
             if(test==1)
             {
+                if(t==t_size/2 & &x==x_size/2)
+                {
+                    printf("after break t=%d x=%d\n",t,x);
+                    if(u_3[t][x]==0)
+                    {
+                        fprintf(log_2,"%lf",0.0);
+                    }
+                    else
+                    {
+                        ex=exact(t*dt,x*dx);
+                        err=error(ex,u_3[t][x]);
+                        fprintf(log_2,"%lf",log(err));
+                    }
+                }
                 break;
             }
-
         }
     }
+    fclose(log_2);
 }
 
 void Explicit()
 {
     FILE *fptr;
     fptr=fopen("explicit_2.csv","w");
-    fprintf(fptr,"n,j,u[n][j],exact,error\n");
+    //fprintf(fptr,"n,j,u[n][j],exact,error\n");
     //fptr=fopen("explicit_2.txt","w");
 
     printf("\nPart 1: Explicit\n\n");
@@ -444,7 +429,7 @@ void Implicit()
 {
     FILE *fptr1;
     fptr1=fopen("implicit_2.csv","w");
-    fprintf(fptr1,"n,j,u[n][j],exact,error\n");
+    //fprintf(fptr1,"n,j,u[n][j],exact,error\n");
     //fptr=fopen("implicit_2.txt","w");
 
     printf("\n\nPart 2: Implicit\n\n");
@@ -469,7 +454,7 @@ void CrankNicolson()
 {
     FILE *fptr2;
     fptr2=fopen("cranknicolson_2.csv","w");
-    fprintf(fptr2,"n,j,u[n][j],exact,error\n");
+    //fprintf(fptr2,"n,j,u[n][j],exact,error\n");
     //fptr=fopen("cranknicolson_2.txt","w");
 
     printf("\nPart 3: Crank-Nicolson\n\n");
@@ -494,7 +479,7 @@ void Gauss()
 {
     FILE *fptr3;
     fptr3=fopen("gauss_2.csv","w");
-    fprintf(fptr3,"n,j,u[n][j],exact,error\n");
+    //fprintf(fptr3,"n,j,u[n][j],exact,error\n");
     //fptr=fopen("gauss_2.txt","w");
 
     printf("\nPart 4: Gauss\n\n");
@@ -536,9 +521,9 @@ int main()
 
 //-----------------------------------------Part 3: Crank-Nicolson---------------------------------------
 
-    //CrankNicolson();
+    CrankNicolson();
 
-//-----------------------------------------Part 4: Gauss---------------------------------------
+//-----------------------------------------Part 4: Gauss------------------------------------------------
 
     Gauss();
 
